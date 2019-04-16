@@ -12,8 +12,8 @@ namespace GonFactory
 /// </summary>
     abstract class UartDevice : IDevice
     {
-
-        SerialPort sp;
+        
+        
         protected SerialPort Sp {get;}
         [RegularExpression(@"^COM\d*$", ErrorMessage = "Неверный формат имени COM-порта")]
         string Com { get; set; }
@@ -31,7 +31,6 @@ namespace GonFactory
             this.Parity = _parity;
             this.DataBits = _dataBits;
             this.StpBits = _stpBits;
-            this.Sp = sp;
         }
         public void Close()
         {
