@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GonFactory
+namespace GonCommand
 {
-    abstract class Message
+    interface ICommand
     {
+         void Execute();
     }
 }

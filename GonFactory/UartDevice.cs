@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using System.ComponentModel.DataAnnotations;
-namespace GonFactory
+namespace GonCommand
 {
 /// <summary>
 /// Абстрактный класс, описывающий общее устройство, работающее по UART.
@@ -14,7 +14,7 @@ namespace GonFactory
     {
         
         
-        protected SerialPort Sp {get;}
+        protected SerialPort Sp { get; private set; }
         [RegularExpression(@"^COM\d*$", ErrorMessage = "Неверный формат имени COM-порта")]
         string Com { get; set; }
         [Range(200, 921600, ErrorMessage = "Скорость передачи должна находиться в пределах от 200 до 921600")]
@@ -32,18 +32,18 @@ namespace GonFactory
             this.DataBits = _dataBits;
             this.StpBits = _stpBits;
         }
-        public void Close()
+        public virtual void Close()
         {
-            sp.Close();
+            Sp.Close();
         }
 
-        public void Init()
+        public virtual void Init()
         {
-            sp = new SerialPort(Com, Baud, Parity, DataBits, StpBits);
+            Sp = new SerialPort(Com, Baud, Parity, DataBits, StpBits);
         }
-        protected abstract void SendCommand(Message mes);
-        protected abstract Message RecciveAnswer();
-        protected abstract Message ValidateAnswer();
+        protected abstract void SendCommand(ICommand mes);
+        protected abstract ICommand RecciveAnswer();
+        protected abstract ICommand ValidateAnswer();
 
     }
 }

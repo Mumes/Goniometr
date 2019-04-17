@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goniometr", "Goniometr\Goniometr.csproj", "{651F936B-0DC7-4456-A366-5AA587CB41BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonFactory", "GonFactory\GonFactory.csproj", "{862DB85A-31C8-49B2-8D1F-8D036FFD5253}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonCommand", "GonFactory\GonCommand.csproj", "{862DB85A-31C8-49B2-8D1F-8D036FFD5253}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

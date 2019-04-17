@@ -23,6 +23,7 @@ namespace Goniometr
         public MainWindow()
         {
             InitializeComponent();
+            
         }
     }
 }
