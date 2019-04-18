@@ -11,9 +11,7 @@ namespace GonCommand
 /// Абстрактный класс, описывающий общее устройство, работающее по UART.
 /// </summary>
     abstract class UartDevice : IDevice
-    {
-        
-        
+    {   
         protected SerialPort Sp { get; private set; }
         [RegularExpression(@"^COM\d*$", ErrorMessage = "Неверный формат имени COM-порта")]
         string Com { get; set; }
@@ -36,14 +34,9 @@ namespace GonCommand
         {
             Sp.Close();
         }
-
         public virtual void Init()
         {
             Sp = new SerialPort(Com, Baud, Parity, DataBits, StpBits);
         }
-        protected abstract void SendCommand(ICommand mes);
-        protected abstract ICommand RecciveAnswer();
-        protected abstract ICommand ValidateAnswer();
-
     }
 }

@@ -5,9 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Goniometr"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="133,79,0,0" VerticalAlignment="Top" Width="75"/>
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded" Background='Black'>
+    <Grid Width="500" Height="500" Name="icgrid" Margin="73,119,395.667,151.667"></Grid>
 
-    </Grid>
 </Window>
