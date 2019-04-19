@@ -44,11 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiDevice.cs" />
+    <Compile Include="CommandsCoordinates.cs" />
     <Compile Include="ICUsbCamera.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Invoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UartCoordinateReader.cs" />
     <Compile Include="UartDevice.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

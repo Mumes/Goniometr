@@ -10,4 +10,18 @@ namespace GonCommand
     {
          void Execute();
     }
+
+    class MacroCommand : ICommand
+    {
+        List<ICommand> commands;
+        public MacroCommand(List<ICommand> coms)
+        {
+            commands = coms;
+        }
+        public void Execute()
+        {
+            foreach (ICommand c in commands)
+                c.Execute();
+        }       
+    }
 }
