@@ -37,6 +37,8 @@ namespace GonCommand
         public virtual void Init()
         {
             Sp = new SerialPort(Com, Baud, Parity, DataBits, StpBits);
+            if (!Sp.IsOpen)
+                Sp.Open();
         }
     }
 }
