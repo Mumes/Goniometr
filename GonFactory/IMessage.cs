@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace GonCommand
 {
-    class CommandsCoordinates
+    interface IMessage
     {
+        bool Validate();
+    }
+
+    interface IUartMessage:IMessage
+    {
+        void GetMesBytes();
     }
 }
