@@ -52,13 +52,17 @@ namespace GonCommand
         public const int AnswerCount = 8;
         public byte[] AnswerBytes { get; private set; }
         protected const byte StartAnswer = 0x0d;
-        public UartCoordinateReaderAnswer(byte[] _ans)
-        {
-            _ans = AnswerBytes;
-        }
-        public void GetMesBytes()
+        public UartCoordinateReaderAnswer()
         {
             
+        }
+        public UartCoordinateReaderAnswer(byte[] _ans)
+        {
+            GetMesBytes(_ans);
+        }
+        public  void GetMesBytes(byte[] _ans)
+        {
+            _ans = AnswerBytes;
         }
 
         public virtual bool Validate()

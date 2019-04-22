@@ -22,11 +22,9 @@ namespace GonCommand
         {
             UartCoordinateReaderRequestMaschtab s = new UartCoordinateReaderRequestMaschtab(_axis,_maschtab);
             Sp.Write(s.RequestBytes,0,s.RequestBytes.Length);
-            byte[] ans;
-           //Sp.Read(ans,0,)
+            byte[] ans=new byte[8];
+            Sp.Read(ans, 0, Sp.BytesToRead);
             UartCoordinateReaderAnswerMaschtab r = new UartCoordinateReaderAnswerMaschtab();
-            Sp.Read()
-
         }
     }
 }
