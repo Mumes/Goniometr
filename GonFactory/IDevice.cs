@@ -18,6 +18,6 @@ namespace GonCommand
         /// <summary>
         /// Функция окончания работы с устройством.
         /// </summary>
-        void Close();             
+        void Close();
     }
 }

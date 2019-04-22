@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ApiDevice.cs" />
     <Compile Include="CommandsCoordinates.cs" />
+    <Compile Include="GonEventHandler.cs" />
     <Compile Include="ICUsbCamera.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="ICommand.cs" />

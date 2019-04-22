@@ -11,7 +11,8 @@ namespace GonCommand
 /// Абстрактный класс, описывающий общее устройство, работающее по UART.
 /// </summary>
     abstract class UartDevice : IDevice
-    {   
+    {
+        public event GonEventHandler OnReccive;
         protected SerialPort Sp { get; private set; }
         [RegularExpression(@"^COM\d*$", ErrorMessage = "Неверный формат имени COM-порта")]
         string Com { get; set; }
