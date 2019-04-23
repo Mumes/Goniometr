@@ -13,15 +13,17 @@ namespace GonCommand
     /// </summary>
     abstract class UartCoordinateReaderRequest : IUartMessage
     {
+        public int CountBytes { get; private set; }
         protected const ushort StartRequest = 0xAACC;
         protected byte Command { get; set; }
         protected byte SecondCommand { get; set; }
         protected byte[] BodyCommandFirst { get; set; }
         protected byte[] BodyCommandSecond { get; set; }
-        public byte[] RequestBytes { get; private set; }
+        public byte[] MesBytes { get; private set; }
 
         public UartCoordinateReaderRequest()
         {
+            CountBytes = 12;
             BodyCommandFirst = new byte[4];
             BodyCommandSecond = new byte[4];
         }
@@ -34,7 +36,7 @@ namespace GonCommand
                 writer.Write(SecondCommand);
                 writer.Write(BodyCommandFirst);
                 writer.Write(BodyCommandSecond);
-                RequestBytes = stream.ToArray();
+                MesBytes = stream.ToArray();
             }
         }
         public bool Validate()
@@ -67,23 +69,29 @@ namespace GonCommand
         }
     }
 
+    class UartCoordinateReaderRequestState : UartCoordinateReaderRequest
+    {
+    }
+
 
     abstract class UartCoordinateReaderAnswer : IUartMessage
-    {
-        public const int AnswerCount = 8;
-        public byte[] AnswerBytes { get; private set; }
+    { 
+        public byte[] MesBytes { get; set; }
+        public  int CountBytes { get; protected set; }
+        public bool IsValid { get; private set; }
         protected const byte StartAnswer = 0x0d;
         public UartCoordinateReaderAnswer()
         {
-            
+            CountBytes = 8;
         }
         public UartCoordinateReaderAnswer(byte[] _ans)
         {
-            _ans = AnswerBytes;
+            _ans = MesBytes;
+            CountBytes = 8;
         }
         public  void SetMesBytes(byte[] _ans)
         {
-            _ans = AnswerBytes;
+            _ans = MesBytes;
         }
         public void GetMesBytes()
         {
@@ -91,28 +99,40 @@ namespace GonCommand
         }
         public virtual bool Validate()
         {
-            if (AnswerBytes[1]==StartAnswer)
-                return true;
+            if (MesBytes[0]==StartAnswer)
+                return IsValid =true;
             else
-                return false;
+                return IsValid=false;
         }
     }
     class UartCoordinateReaderAnswerMaschtab : UartCoordinateReaderAnswer
     {
-        public bool IsValid { get; private set; }
 
         public UartCoordinateReaderAnswerMaschtab() 
         {
-            
         }
-        public override bool Validate()
-        {
-            return IsValid = base.Validate();
-        }
+        
         public UartCoordinateReaderAnswerMaschtab(byte[] _ans) : base(_ans)
         {
-            IsValid =base.Validate();
         }
+    }
+    class UartCoordinateReaderAnswerCoordinates : UartCoordinateReaderAnswer
+    {
+        public float CoordinateX { get; private set; }
+        public float CoordinateY { get; private set; }
+        public UartCoordinateReaderAnswerCoordinates()
+        {
+        }
+
+        public UartCoordinateReaderAnswerCoordinates(byte[] _ans) : base(_ans)
+        {
+            Validate();
+            CoordinateX = BitConverter.ToSingle(_ans,4);
+            CoordinateY = BitConverter.ToSingle(_ans, 8);
+        }
+    }
+    class UartCoordinateReaderAnswerState : UartCoordinateReaderAnswer
+    {
     }
 
 }

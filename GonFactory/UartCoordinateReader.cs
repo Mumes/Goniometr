@@ -36,21 +36,20 @@ namespace GonCommand
         public void SetMaschtab(byte _axis,float _maschtab)
         {         
             UartCoordinateReaderRequestMaschtab s = new UartCoordinateReaderRequestMaschtab(_axis,_maschtab);
-            Sp.Write(s.RequestBytes,0,s.RequestBytes.Length);
+            Sp.Write(s.MesBytes,0,s.MesBytes.Length);
            
             UartCoordinateReaderAnswerMaschtab r = new UartCoordinateReaderAnswerMaschtab();
-            byte[] ans=new byte[UartCoordinateReaderAnswer.AnswerCount];
-            Sp.Read(ans, 0, Sp.BytesToRead);
-            r.SetMesBytes(ans);
+
+            ReadWithTimeout(r);
             r.Validate();
             if (r.IsValid && _axis == 0x01)
                 isMaschtabXSet = true;
-            else
+            else if(!r.IsValid && _axis == 0x01)
                 isMaschtabXSet = false;
 
             if (r.IsValid && _axis == 0x02)
                 isMaschtabYSet = true;
-            else
+            else if (!r.IsValid && _axis == 0x02)
                 isMaschtabYSet = false;             
         }
     }

@@ -12,7 +12,9 @@ namespace GonCommand
 /// </summary>
     abstract class UartDevice : IDevice
     {
-        public event GonEventHandler OnReccive;
+        protected internal event GonEventHandler OnReccive;
+        protected internal event GonEventHandler OnTimeOut;
+        protected internal event GonEventHandler OnWrongData;
         protected SerialPort Sp { get; private set; }
         [RegularExpression(@"^COM\d*$", ErrorMessage = "Неверный формат имени COM-порта")]
         string Com { get; set; }
@@ -38,8 +40,23 @@ namespace GonCommand
         public virtual void Init()
         {
             Sp = new SerialPort(Com, Baud, Parity, DataBits, StpBits);
+            Sp.ReadTimeout = 500;
+            Sp.WriteTimeout = 500;
             if (!Sp.IsOpen)
                 Sp.Open();
+        }
+        public virtual bool ReadWithTimeout(IUartMessage _mes)
+        {
+            try
+            {
+                Sp.Read(_mes.MesBytes, 0, _mes.CountBytes);
+                return true;
+            }
+            catch(TimeoutException)
+            {
+                return false;
+            }
+            
         }
     }
 }

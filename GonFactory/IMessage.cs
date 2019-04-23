@@ -18,6 +18,8 @@ namespace GonCommand
     /// </summary>
     interface IUartMessage:IMessage
     {
+        int CountBytes { get; }
+        byte[] MesBytes { get; }
         void GetMesBytes();
     }
 }
