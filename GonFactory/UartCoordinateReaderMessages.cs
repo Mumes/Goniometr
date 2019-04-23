@@ -8,6 +8,9 @@ using System.IO;
 
 namespace GonCommand
 {
+    /// <summary>
+    /// Абстрактный класс для сообщения-запроса для устройства чтения координат
+    /// </summary>
     abstract class UartCoordinateReaderRequest : IUartMessage
     {
         protected const ushort StartRequest = 0xAACC;
@@ -17,6 +20,11 @@ namespace GonCommand
         protected byte[] BodyCommandSecond { get; set; }
         public byte[] RequestBytes { get; private set; }
 
+        public UartCoordinateReaderRequest()
+        {
+            BodyCommandFirst = new byte[4];
+            BodyCommandSecond = new byte[4];
+        }
         public virtual void GetMesBytes()
         {
             using (MemoryStream stream = new MemoryStream())
@@ -34,7 +42,9 @@ namespace GonCommand
             return true;
         }
     }
-
+    /// <summary>
+    /// Сообщение-запрос на установку масштабного кожффициента
+    /// </summary>
     class UartCoordinateReaderRequestMaschtab: UartCoordinateReaderRequest
     {
         public byte Axis { get; set; }
@@ -47,6 +57,17 @@ namespace GonCommand
             GetMesBytes();
         }
     }
+
+    class UartCoordinateReaderRequestCoordinates : UartCoordinateReaderRequest
+    {
+        public UartCoordinateReaderRequestCoordinates()
+        {
+            Command = 0x07;
+            GetMesBytes();
+        }
+    }
+
+
     abstract class UartCoordinateReaderAnswer : IUartMessage
     {
         public const int AnswerCount = 8;
@@ -58,13 +79,16 @@ namespace GonCommand
         }
         public UartCoordinateReaderAnswer(byte[] _ans)
         {
-            GetMesBytes(_ans);
+            _ans = AnswerBytes;
         }
-        public  void GetMesBytes(byte[] _ans)
+        public  void SetMesBytes(byte[] _ans)
         {
             _ans = AnswerBytes;
         }
+        public void GetMesBytes()
+        {
 
+        }
         public virtual bool Validate()
         {
             if (AnswerBytes[1]==StartAnswer)
@@ -76,11 +100,19 @@ namespace GonCommand
     class UartCoordinateReaderAnswerMaschtab : UartCoordinateReaderAnswer
     {
         public bool IsValid { get; private set; }
+
+        public UartCoordinateReaderAnswerMaschtab() 
+        {
+            
+        }
+        public override bool Validate()
+        {
+            return IsValid = base.Validate();
+        }
         public UartCoordinateReaderAnswerMaschtab(byte[] _ans) : base(_ans)
         {
-            IsValid =Validate();
+            IsValid =base.Validate();
         }
-
     }
 
 }

@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace GonCommand
 {
+    /// <summary>
+    /// Базовый интерфейс для команды
+    /// </summary>
     interface ICommand
     {
          void Execute();
     }
-
+    /// <summary>
+    /// Класс для команды, объединяющей в себе несколько команд
+    /// </summary>
     class MacroCommand : ICommand
     {
         List<ICommand> commands;

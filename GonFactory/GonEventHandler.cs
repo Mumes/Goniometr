@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace GonCommand
 {
     public delegate void GonEventHandler(object sender, GonEventArgs e);
+    /// <summary>
+    /// Общий класс для события
+    /// </summary>
     public class GonEventArgs
     {
         // Сообщение

@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 namespace GonCommand
 {
+    /// <summary>
+    /// Общий класс для команды для любого устройства
+    /// </summary>
     interface IMessage
     {
         bool Validate();
     }
-
+    /// <summary>
+    /// Интерфейс для UART сообщения
+    /// </summary>
     interface IUartMessage:IMessage
     {
         void GetMesBytes();

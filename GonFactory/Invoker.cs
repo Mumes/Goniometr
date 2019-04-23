@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace GonCommand
 {
+    /// <summary>
+    /// Класс для паттерна Command
+    /// </summary>
     class Invoker
     {
         public Stack<ICommand> CommandsHistory;

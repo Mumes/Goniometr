@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace GonCommand
 {
+    /// <summary>
+    /// Класс команд для устройства чтения координат
+    /// </summary>
     class CommandsCoordinates
     {
     }
