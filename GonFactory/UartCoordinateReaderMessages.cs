@@ -23,7 +23,7 @@ namespace GonCommand
 
         public UartCoordinateReaderRequest()
         {
-            CountBytes = 12;
+            CountBytes = 11;
             BodyCommandFirst = new byte[4];
             BodyCommandSecond = new byte[4];
         }
@@ -71,6 +71,11 @@ namespace GonCommand
 
     class UartCoordinateReaderRequestState : UartCoordinateReaderRequest
     {
+        public UartCoordinateReaderRequestState()
+        {
+            Command = 0x03;
+            GetMesBytes();
+        }
     }
 
 
@@ -82,20 +87,12 @@ namespace GonCommand
         protected const byte StartAnswer = 0x0d;
         public UartCoordinateReaderAnswer()
         {
-            CountBytes = 8;
+            CountBytes = 9;
         }
         public UartCoordinateReaderAnswer(byte[] _ans)
         {
             _ans = MesBytes;
-            CountBytes = 8;
-        }
-        public  void SetMesBytes(byte[] _ans)
-        {
-            _ans = MesBytes;
-        }
-        public void GetMesBytes()
-        {
-
+            CountBytes = 9;
         }
         public virtual bool Validate()
         {
@@ -127,12 +124,29 @@ namespace GonCommand
         public UartCoordinateReaderAnswerCoordinates(byte[] _ans) : base(_ans)
         {
             Validate();
-            CoordinateX = BitConverter.ToSingle(_ans,4);
-            CoordinateY = BitConverter.ToSingle(_ans, 8);
+            CoordinateX = BitConverter.ToSingle(_ans,1);
+            CoordinateY = BitConverter.ToSingle(_ans, 5);
         }
     }
     class UartCoordinateReaderAnswerState : UartCoordinateReaderAnswer
     {
+        public bool IsButtonSet { get; private set; }     
+        public bool IsCoordinateXValid { get; private set; }
+        public bool IsCoordinateYValid { get; private set; }
+
+        public UartCoordinateReaderAnswerState(byte[] _ans) : base(_ans)
+        {
+            Validate();
+            if (MesBytes[1] == 0x73) IsCoordinateXValid = true;
+            else if(MesBytes[1] == 0x63) IsCoordinateXValid = false;
+
+            if ((MesBytes[2]&0xFB) == 0x73) IsCoordinateXValid = true;
+            else if ((MesBytes[2] & 0xFB) == 0x63) IsCoordinateXValid = false;
+
+            if ((MesBytes[2] & 0x04) == 0x04) IsButtonSet = true;
+            else IsButtonSet = false;
+        }
+
     }
 
 }

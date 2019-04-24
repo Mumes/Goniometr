@@ -20,6 +20,5 @@ namespace GonCommand
     {
         int CountBytes { get; }
         byte[] MesBytes { get; }
-        void GetMesBytes();
     }
 }

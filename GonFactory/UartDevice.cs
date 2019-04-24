@@ -12,9 +12,6 @@ namespace GonCommand
 /// </summary>
     abstract class UartDevice : IDevice
     {
-        protected internal event GonEventHandler OnReccive;
-        protected internal event GonEventHandler OnTimeOut;
-        protected internal event GonEventHandler OnWrongData;
         protected SerialPort Sp { get; private set; }
         [RegularExpression(@"^COM\d*$", ErrorMessage = "Неверный формат имени COM-порта")]
         string Com { get; set; }

@@ -15,14 +15,14 @@ namespace GonCommand
         /// 
         /// </summary>
         public float MaschtabX {get; private set;}
-        public bool isMaschtabXSet {get; private set;}
+        public bool IsMaschtabXSet {get; private set;}
         public float MaschtabY {get; private set;}
-        public bool isMaschtabYSet {get; private set;}
+        public bool IsMaschtabYSet {get; private set;}
         public float CoordinateX {get; private set;}
-        public bool isCoordinateXValid {get; private set;}
+        public bool IsCoordinateXValid {get; private set;}
         public float CoordinateY {get; private set;}
-        public bool isCoordinateYValid {get; private set;}
-        public bool isButtonSet {get; private set;}
+        public bool IsCoordinateYValid {get; private set;}
+        public bool IsButtonSet {get; private set;}
 
         public UartCoordinateReader(string _com = "COM1", int _baud = 9600, Parity _parity = Parity.None,
             int _dataBits = 8, StopBits _stpBits = StopBits.One) : base(_com,_baud , _parity, _dataBits,_stpBits )
@@ -43,14 +43,14 @@ namespace GonCommand
             ReadWithTimeout(r);
             r.Validate();
             if (r.IsValid && _axis == 0x01)
-                isMaschtabXSet = true;
+                IsMaschtabXSet = true;
             else if(!r.IsValid && _axis == 0x01)
-                isMaschtabXSet = false;
+                IsMaschtabXSet = false;
 
             if (r.IsValid && _axis == 0x02)
-                isMaschtabYSet = true;
+                IsMaschtabYSet = true;
             else if (!r.IsValid && _axis == 0x02)
-                isMaschtabYSet = false;             
+                IsMaschtabYSet = false;             
         }
     }
 }

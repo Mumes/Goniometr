@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="ApiDevice.cs" />
     <Compile Include="CommandsCoordinates.cs" />
-    <Compile Include="GonEventHandler.cs" />
     <Compile Include="ICUsbCamera.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="ICommand.cs" />
@@ -53,6 +52,7 @@
     <Compile Include="Invoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UartCoordinateReader.cs" />
+    <Compile Include="UartCoordinateReaderCommands.cs" />
     <Compile Include="UartCoordinateReaderMessages.cs" />
     <Compile Include="UartDevice.cs" />
   </ItemGroup>
