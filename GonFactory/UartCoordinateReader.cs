@@ -52,5 +52,26 @@ namespace GonCommand
             else if (!r.IsValid && _axis == 0x02)
                 IsMaschtabYSet = false;             
         }
+        public void GetCoordinates()
+        {
+            UartCoordinateReaderRequestCoordinates s = new UartCoordinateReaderRequestCoordinates();
+            Sp.Write(s.MesBytes, 0, s.MesBytes.Length);
+            UartCoordinateReaderAnswerCoordinates r = new UartCoordinateReaderAnswerCoordinates();
+            ReadWithTimeout(r);
+            r.Validate();
+            CoordinateX = r.CoordinateX;
+            CoordinateY = r.CoordinateY;
+        }
+
+        public void GetStatus()
+        {
+            UartCoordinateReaderRequestStatus s = new UartCoordinateReaderRequestCoordinates();
+            Sp.Write(s.MesBytes, 0, s.MesBytes.Length);
+            UartCoordinateReaderAnswerCoordinates r = new UartCoordinateReaderAnswerCoordinates();
+            ReadWithTimeout(r);
+            r.Validate();
+            CoordinateX = r.CoordinateX;
+            CoordinateY = r.CoordinateY;
+        }
     }
 }
