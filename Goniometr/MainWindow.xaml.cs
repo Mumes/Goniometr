@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 namespace Goniometr
 {
@@ -24,7 +25,8 @@ namespace Goniometr
         public MainWindow()
         {
             InitializeComponent();
-            
+            GonCommandClient gcc = new GonCommandClient();
+            DataContext = gcc;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -32,6 +34,7 @@ namespace Goniometr
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host =
                 new System.Windows.Forms.Integration.WindowsFormsHost();
+            //playing with camera device
             TIS.Imaging.ICImagingControl ic = new TIS.Imaging.ICImagingControl();
             ic.Width = 25;
             ic.Height = 25;

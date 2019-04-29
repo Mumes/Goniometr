@@ -9,7 +9,7 @@ namespace GonCommand
 /// <summary>
 /// Интерфейс, описывающий общее внешнее устройство. 
 /// </summary>
-    interface IDevice
+    public interface IDevice
     { 
         /// <summary>
         /// Инициализация устройства.

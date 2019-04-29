@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Goniometr"
+        xmlns:ports="clr-namespace:System.IO.Ports;assembly=System"
         mc:Ignorable="d"
         Title="MainWindow" Height="614.973" Width="1013.108" Loaded="Window_Loaded" Background='AliceBlue'>
     <Grid>
@@ -14,8 +15,12 @@
             </Grid.ColumnDefinitions>
         </Grid>
         <Label x:Name="label" Content="Координата X:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="93"/>
-        <Label x:Name="XVal" Content="" HorizontalAlignment="Left" Margin="108,10,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="XVal" Content="{Binding Usr.CoordinateX.ToString()}" HorizontalAlignment="Left" Margin="108,10,0,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="label1" Content="Координата Y:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="93"/>
-        <Label x:Name="YVal" Content="" HorizontalAlignment="Left" Margin="103,41,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="YVal" Content="{Binding Usr.CoordinateY.ToString()}" HorizontalAlignment="Left" Margin="103,41,0,0" VerticalAlignment="Top" Width="100"/>
+        <ComboBox x:Name="Ports" ItemsSource="{Binding VV.SerialPortsArray}" SelectedItem="{Binding Path=VV.SerialPortSelected}" HorizontalAlignment="Left" Margin="877,0,0,553.333" Width="120" Height="22" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="Baud" Text="{Binding Path=VV.BaudRateValue}" HorizontalAlignment="Left" Height="23" Margin="877,37,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Init" Command="{Binding InitCommand}" Content="Button" HorizontalAlignment="Left" Margin="899,65,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Read" Command="{Binding ReadCommand}" Content="Button" HorizontalAlignment="Left" Margin="51,72,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

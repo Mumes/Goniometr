@@ -9,7 +9,7 @@ namespace GonCommand
     /// <summary>
     /// Описание работы устройства чтения координат
     /// </summary>
-    class UartCoordinateReader:UartDevice
+    public class UartCoordinateReader:UartDevice
     {
         /// <summary>
         /// 
@@ -32,6 +32,8 @@ namespace GonCommand
         public override void Init()
         {
             base.Init();
+            //Sp.Write(new byte[] { 0xAA, 0xCC, 0x01, 0x01, 0x00, 0x00, 0x00, 0x38, 0x9F, 0x69, 0x72 }, 0, 11);
+            //Sp.Read(new byte[8], 0, 8);
         }
         public void SetMaschtab(byte _axis,float _maschtab)
         {         
@@ -65,13 +67,13 @@ namespace GonCommand
 
         public void GetStatus()
         {
-            UartCoordinateReaderRequestStatus s = new UartCoordinateReaderRequestCoordinates();
+            UartCoordinateReaderRequestState s = new UartCoordinateReaderRequestState();
             Sp.Write(s.MesBytes, 0, s.MesBytes.Length);
-            UartCoordinateReaderAnswerCoordinates r = new UartCoordinateReaderAnswerCoordinates();
+            UartCoordinateReaderAnswerState r = new UartCoordinateReaderAnswerState();
             ReadWithTimeout(r);
             r.Validate();
-            CoordinateX = r.CoordinateX;
-            CoordinateY = r.CoordinateY;
+            IsCoordinateXValid = r.IsCoordinateXValid;
+            IsCoordinateYValid = r.IsCoordinateYValid;
         }
     }
 }

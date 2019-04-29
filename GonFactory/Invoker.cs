@@ -11,17 +11,17 @@ namespace GonCommand
     /// </summary>
     class Invoker
     {
-        public Stack<ICommand> CommandsHistory;
-        public ICommand Command {get;private set;}
-        public void SetCommand(ICommand com)
-        {
-            Command = com;
-            CommandsHistory = new Stack<ICommand>();
-        }
-        public void StartCommand()
-        {
-                Command?.Execute();
-                CommandsHistory.Push(Command);
-        }
+        //public Stack<ICommand> CommandsHistory;
+        //public ICommand Command {get;private set;}
+        //public void SetCommand(ICommand com)
+        //{
+            //Command = com;
+            //CommandsHistory = new Stack<ICommand>();
+        //}
+        //public void StartCommand()
+        //{
+                //Command?.Execute();
+                //CommandsHistory.Push(Command);
+        //}
     }
 }

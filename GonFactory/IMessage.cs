@@ -9,14 +9,14 @@ namespace GonCommand
     /// <summary>
     /// Общий класс для команды для любого устройства
     /// </summary>
-    interface IMessage
+    public interface IMessage
     {
         bool Validate();
     }
     /// <summary>
     /// Интерфейс для UART сообщения
     /// </summary>
-    interface IUartMessage:IMessage
+    public interface IUartMessage:IMessage
     {
         int CountBytes { get; }
         byte[] MesBytes { get; }

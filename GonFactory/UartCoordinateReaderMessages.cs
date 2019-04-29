@@ -26,14 +26,16 @@ namespace GonCommand
             CountBytes = 11;
             BodyCommandFirst = new byte[4];
             BodyCommandSecond = new byte[4];
+            MesBytes = new byte[CountBytes];
         }
         public virtual void GetMesBytes()
         {
             using (MemoryStream stream = new MemoryStream())
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
+                writer.Write(StartRequest);
                 writer.Write(Command);
-                writer.Write(SecondCommand);
+               // writer.Write(SecondCommand);
                 writer.Write(BodyCommandFirst);
                 writer.Write(BodyCommandSecond);
                 MesBytes = stream.ToArray();
@@ -88,11 +90,13 @@ namespace GonCommand
         public UartCoordinateReaderAnswer()
         {
             CountBytes = 9;
+            MesBytes = new byte[CountBytes];
         }
         public UartCoordinateReaderAnswer(byte[] _ans)
         {
             _ans = MesBytes;
             CountBytes = 9;
+            MesBytes = new byte[CountBytes];
         }
         public virtual bool Validate()
         {
@@ -134,6 +138,8 @@ namespace GonCommand
         public bool IsCoordinateXValid { get; private set; }
         public bool IsCoordinateYValid { get; private set; }
 
+        public UartCoordinateReaderAnswerState()
+        { }
         public UartCoordinateReaderAnswerState(byte[] _ans) : base(_ans)
         {
             Validate();

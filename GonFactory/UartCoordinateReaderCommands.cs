@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GonCommand
 {
-    class UartCoordinateReaderCommandMaschtab : ICommand
+    class UartCoordinateReaderCommandMaschtab 
     {
         UartCoordinateReader reader;
 
@@ -20,7 +20,7 @@ namespace GonCommand
         }
     }
 
-    class UartCoordinateReaderCommandCoordinates : ICommand
+    class UartCoordinateReaderCommandCoordinates
     {
         UartCoordinateReader reader;
 
@@ -34,7 +34,7 @@ namespace GonCommand
         }
     }
 
-    class UartCoordinateReaderCommandState : ICommand
+    class UartCoordinateReaderCommandState 
     {
         UartCoordinateReader reader;
 
