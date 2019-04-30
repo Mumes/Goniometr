@@ -18,6 +18,7 @@ namespace GonCommand
         }
         public override void Init()
         {
+
         }
         public override void Close()
         {

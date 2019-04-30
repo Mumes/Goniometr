@@ -38,8 +38,9 @@ namespace Goniometr
             TIS.Imaging.ICImagingControl ic = new TIS.Imaging.ICImagingControl();
             ic.Width = 25;
             ic.Height = 25;
-            ic.BackColor = System.Drawing.Color.Red;
-            //ic.ShowDeviceSettingsDialog();
+            //ic.BackColor = System.Drawing.Color.Red;
+            ic.ShowDeviceSettingsDialog();
+            ic.LiveStart();
             host.Child = ic;
             this.icgrid.Children.Add(host);
         }

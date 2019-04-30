@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GonCommand;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Goniometr
 {
@@ -12,6 +14,8 @@ namespace Goniometr
     {
         public ViewValidation VV { get; private set; }
         public UartCoordinateReader Ucr { get; private set; }
+        
+        
         private CommandsCoordinates initCommand;
         public CommandsCoordinates InitCommand
         {
@@ -36,6 +40,8 @@ namespace Goniometr
                     (readCommand = new CommandsCoordinates(obj =>
                     {                      
                         Ucr.GetCoordinates();
+                        VV.CX = Ucr.CoordinateX.ToString();
+                        VV.CY = Ucr.CoordinateY.ToString();
                     }
                        ));
             }
@@ -43,7 +49,6 @@ namespace Goniometr
 
         public GonCommandClient()
         {
-            //SerialPortsArray = SerialPort.GetPortNames();
             VV = new ViewValidation();
         }
     }
