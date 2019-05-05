@@ -9,7 +9,7 @@ namespace GonCommand
     /// <summary>
     /// Базовый абстрактный класс для устройств, работа с которыми осуществляется через сторонний API
     /// </summary>
-    abstract class ApiDevice:IDevice
+    public abstract class ApiDevice:IDevice
     {
         public abstract void Init();
         public abstract void Close();

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.Resources;
 
 namespace Goniometr
 {
@@ -22,10 +23,11 @@ namespace Goniometr
     /// </summary>
     public partial class MainWindow : Window
     {
+        GonCommandClient gcc;
         public MainWindow()
         {
             InitializeComponent();
-            GonCommandClient gcc = new GonCommandClient();
+            gcc = new GonCommandClient();
             DataContext = gcc;
         }
 
@@ -36,10 +38,15 @@ namespace Goniometr
                 new System.Windows.Forms.Integration.WindowsFormsHost();
             //playing with camera device
             TIS.Imaging.ICImagingControl ic = new TIS.Imaging.ICImagingControl();
+            gcc.ICUsbCamControl = ic;
+            
             ic.Width = 25;
             ic.Height = 25;
             ic.BackColor = System.Drawing.Color.Red;
+            
+            ic.BackgroundImage =Goniometr.Properties.Resources.nocam;
             //ic.ShowDeviceSettingsDialog();
+            //ic.LiveStart();
             host.Child = ic;
             this.icgrid.Children.Add(host);
         }

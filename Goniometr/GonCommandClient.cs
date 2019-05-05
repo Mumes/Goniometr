@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GonCommand;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Goniometr
 {
@@ -12,6 +14,22 @@ namespace Goniometr
     {
         public ViewValidation VV { get; private set; }
         public UartCoordinateReader Ucr { get; private set; }
+        public ICUsbCamera ICUsbCam { get; private set; }
+        TIS.Imaging.ICImagingControl iCUsbCamControl;
+        public TIS.Imaging.ICImagingControl ICUsbCamControl
+        {
+            get
+            {
+                return iCUsbCamControl;
+            }
+
+            set
+            {
+                iCUsbCamControl = value;
+                ICUsbCam = new ICUsbCamera(iCUsbCamControl);
+            }
+        }
+        
         private CommandsCoordinates initCommand;
         public CommandsCoordinates InitCommand
         {
@@ -20,9 +38,10 @@ namespace Goniometr
                 return initCommand ??
                     (initCommand = new CommandsCoordinates(obj=>
                     {
-                        Ucr = new UartCoordinateReader(VV.SerialPortSelected, Convert.ToInt32(VV.BaudRateValue)
-                            ,Parity.None,8,StopBits.Two);
-                        Ucr.Init();
+                        //Ucr = new UartCoordinateReader(VV.SerialPortSelected, Convert.ToInt32(VV.BaudRateValue)
+                        //    ,Parity.None,8,StopBits.Two);
+                        //Ucr.Init();
+                        ICUsbCam.Init();
                     }                     
                        ) );
             }
@@ -36,6 +55,8 @@ namespace Goniometr
                     (readCommand = new CommandsCoordinates(obj =>
                     {                      
                         Ucr.GetCoordinates();
+                        VV.CX = Ucr.CoordinateX.ToString();
+                        VV.CY = Ucr.CoordinateY.ToString();
                     }
                        ));
             }
@@ -43,7 +64,6 @@ namespace Goniometr
 
         public GonCommandClient()
         {
-            //SerialPortsArray = SerialPort.GetPortNames();
             VV = new ViewValidation();
         }
     }

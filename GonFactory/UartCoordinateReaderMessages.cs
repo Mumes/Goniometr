@@ -14,7 +14,7 @@ namespace GonCommand
     abstract class UartCoordinateReaderRequest : IUartMessage
     {
         public int CountBytes { get; private set; }
-        protected const ushort StartRequest = 0xAACC;
+        protected const ushort StartRequest = 0xCCAA;
         protected byte Command { get; set; }
         protected byte SecondCommand { get; set; }
         protected byte[] BodyCommandFirst { get; set; }
@@ -86,7 +86,7 @@ namespace GonCommand
         public byte[] MesBytes { get; set; }
         public  int CountBytes { get; protected set; }
         public bool IsValid { get; private set; }
-        protected const byte StartAnswer = 0x0d;
+        public byte StartAnswer { get;protected set; }
         public UartCoordinateReaderAnswer()
         {
             CountBytes = 9;
@@ -111,10 +111,12 @@ namespace GonCommand
 
         public UartCoordinateReaderAnswerMaschtab() 
         {
+            StartAnswer = 0x08;
         }
         
         public UartCoordinateReaderAnswerMaschtab(byte[] _ans) : base(_ans)
         {
+            StartAnswer = 0x08;
         }
     }
     class UartCoordinateReaderAnswerCoordinates : UartCoordinateReaderAnswer
@@ -123,10 +125,12 @@ namespace GonCommand
         public float CoordinateY { get; private set; }
         public UartCoordinateReaderAnswerCoordinates()
         {
+            StartAnswer = 0x08;
         }
 
         public UartCoordinateReaderAnswerCoordinates(byte[] _ans) : base(_ans)
         {
+            StartAnswer = 0x08;
             Validate();
             CoordinateX = BitConverter.ToSingle(_ans,1);
             CoordinateY = BitConverter.ToSingle(_ans, 5);
@@ -139,9 +143,12 @@ namespace GonCommand
         public bool IsCoordinateYValid { get; private set; }
 
         public UartCoordinateReaderAnswerState()
-        { }
+        {
+            StartAnswer = 0x0d;
+        }
         public UartCoordinateReaderAnswerState(byte[] _ans) : base(_ans)
         {
+            StartAnswer = 0x0d;
             Validate();
             if (MesBytes[1] == 0x73) IsCoordinateXValid = true;
             else if(MesBytes[1] == 0x63) IsCoordinateXValid = false;

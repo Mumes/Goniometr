@@ -6,21 +6,128 @@
         xmlns:local="clr-namespace:Goniometr"
         xmlns:ports="clr-namespace:System.IO.Ports;assembly=System"
         mc:Ignorable="d"
-        Title="MainWindow" Height="614.973" Width="1013.108" Loaded="Window_Loaded" Background='AliceBlue'>
+        Title="ГОНИОМЕТР ЦИФРОВОЙ" Height="614.973" Width="1013.108" Loaded="Window_Loaded" Background='AliceBlue' Icon="Resources/download.png">
+
     <Grid>
-        <Grid Height="250" Name="icgrid" Margin="216,151,539,184" RenderTransformOrigin="0.445,0.533">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1005*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="267*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="icgrid" Margin="10,99,9.667,10.333" RenderTransformOrigin="0.445,0.533" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="209*"/>
-                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <Label x:Name="label" Content="Координата X:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="93"/>
-        <Label x:Name="XVal" Content="{Binding Usr.CoordinateX.ToString()}" HorizontalAlignment="Left" Margin="108,10,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label x:Name="label1" Content="Координата Y:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="93"/>
-        <Label x:Name="YVal" Content="{Binding Usr.CoordinateY.ToString()}" HorizontalAlignment="Left" Margin="103,41,0,0" VerticalAlignment="Top" Width="100"/>
-        <ComboBox x:Name="Ports" ItemsSource="{Binding VV.SerialPortsArray}" SelectedItem="{Binding Path=VV.SerialPortSelected}" HorizontalAlignment="Left" Margin="877,0,0,553.333" Width="120" Height="22" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="Baud" Text="{Binding Path=VV.BaudRateValue}" HorizontalAlignment="Left" Height="23" Margin="877,37,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Init" Command="{Binding InitCommand}" Content="Button" HorizontalAlignment="Left" Margin="899,65,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Read" Command="{Binding ReadCommand}" Content="Button" HorizontalAlignment="Left" Margin="51,72,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="label" Content="Координата X:" HorizontalAlignment="Left" Margin="332,66,0,0" VerticalAlignment="Top" Width="93" Grid.Row="1" Height="26"/>
+        <Label x:Name="XVal" Content="{Binding VV.CX}" HorizontalAlignment="Left" Margin="425,66,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" Height="10"/>
+        <Label x:Name="label1" Content="Координата Y:" HorizontalAlignment="Left" Margin="227,66,0,0" VerticalAlignment="Top" Width="93" Grid.Row="1" Height="26"/>
+        <Label x:Name="YVal" Content="{Binding VV.CY}" HorizontalAlignment="Left" Margin="320,66,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" Height="10"/>
+        <ComboBox x:Name="Ports" ItemsSource="{Binding VV.SerialPortsArray}" SelectedItem="{Binding Path=VV.SerialPortSelected}" HorizontalAlignment="Left" Margin="873,0,0,505.333" Width="120" Height="22" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <TextBox x:Name="Baud" Text="{Binding Path=VV.BaudRateValue}" HorizontalAlignment="Left" Height="23" Margin="873,33,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Button x:Name="Init" Command="{Binding InitCommand}" Content="Button" HorizontalAlignment="Left" Margin="890,61,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="20"/>
+        <Button x:Name="Read" Command="{Binding ReadCommand}" Content="Button" HorizontalAlignment="Left" Margin="108,55,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="20"/>
+        <Menu x:Name="menu"  Height="25" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Margin="0,0,-0.333,0">
+            <Menu.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Menu.RenderTransform>
+            <MenuItem Header="Файл">
+                <MenuItem Header="Сохранить измерения" />
+                <MenuItem Header="Выход" />
+            </MenuItem>
+            <MenuItem Header="Измерения" >
+                <MenuItem Header="Новое измерение" />
+                <MenuItem Header="Выполнить измерение" />
+                <MenuItem Header="Сохранить кадр изображения" />
+                <MenuItem Header="Параметры отчета" />
+            </MenuItem>
+            <MenuItem Header="Настройка" >
+                <MenuItem Header="Калибровка датчика" />
+                <MenuItem Header="Калибровка камеры" />
+            </MenuItem>
+            <MenuItem Header="Параметры">
+                <MenuItem Header="Датчик положения Reinshaw" />
+                <MenuItem Header="Датчик Imaging Source" />
+                <MenuItem Header="Интерфейсный адаптер" />
+            </MenuItem>
+            <MenuItem Header="Справка" >
+                <MenuItem Header="О программе" />
+                <MenuItem Header="Руководство оператора" />
+            </MenuItem>
+
+        </Menu>
+        <Button x:Name="zero"  HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="52" Height="48" Grid.RowSpan="2">
+            <Image Source="Resources/zero.png"  />
+            <Button.ToolTip>
+                <ToolTip>
+                    Обнуление
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="center"  HorizontalAlignment="Left" Margin="67,32,0,0" VerticalAlignment="Top" Width="52" Height="48" Grid.RowSpan="2">
+            <Image Source="Resources/center.png"  />
+            <Button.ToolTip>
+                <ToolTip>
+                    Центр
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="mesure"  HorizontalAlignment="Left" Margin="320,32,0,0" VerticalAlignment="Top" Width="52" Height="48" Grid.RowSpan="2">
+            <Image Source="Resources/mesure.png"  />
+            <Button.ToolTip>
+                <ToolTip>
+                    Измерение
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="frame"  HorizontalAlignment="Left" Margin="377,32,0,0" VerticalAlignment="Top" Width="52" Height="48" Grid.RowSpan="2">
+            <Image Source="Resources/frame.png"  />
+            <Button.ToolTip>
+                <ToolTip>
+                    Кадр
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="new"  HorizontalAlignment="Left" Margin="629,27,0,0" VerticalAlignment="Top" Width="52" Height="48" Grid.RowSpan="2">
+            <Image Source="Resources/new.png" Width="42"  />
+            <Button.ToolTip>
+                <ToolTip>
+                    Новая
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="settings"  HorizontalAlignment="Left" Margin="686,27,0,0" VerticalAlignment="Top" Width="52" Height="48" Grid.RowSpan="2">
+            <Image Source="Resources/settings.png"  />
+            <Button.ToolTip>
+                <ToolTip>
+                    параметры
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="save"  HorizontalAlignment="Left" Margin="743,27,0,0" VerticalAlignment="Top" Width="52" Height="48" Grid.RowSpan="2">
+            <Image Source="Resources/save.png"  />
+            <Button.ToolTip>
+                <ToolTip>
+                    Сохранить
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="end"  HorizontalAlignment="Left" Margin="800,27,0,0" VerticalAlignment="Top" Width="52" Height="48" Grid.RowSpan="2">
+            <Image Source="Resources/end.png"  />
+            <Button.ToolTip>
+                <ToolTip>
+                    Завершить
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </Window>
