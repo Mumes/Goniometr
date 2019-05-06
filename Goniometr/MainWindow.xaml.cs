@@ -40,8 +40,8 @@ namespace Goniometr
             TIS.Imaging.ICImagingControl ic = new TIS.Imaging.ICImagingControl();
             gcc.ICUsbCamControl = ic;
             
-            ic.Width = 25;
-            ic.Height = 25;
+            ic.Width = 250;
+            ic.Height = 250;
             ic.BackColor = System.Drawing.Color.Red;
             
             ic.BackgroundImage =Goniometr.Properties.Resources.nocam;
