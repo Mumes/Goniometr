@@ -23,6 +23,7 @@ namespace GonCommand
             {
                 IcCam.Device = IcCam.Devices[0];
                 IcCam.OverlayBitmapPosition = TIS.Imaging.PathPositions.Device;
+                IcCam.OverlayBitmapAtPath[PathPositions.Device].ColorMode = OverlayColorModes.Color;
                 IcCam.LivePrepared +=icCam_LivePrepared;
                 IcCam.LiveStart();
             }
@@ -41,8 +42,9 @@ namespace GonCommand
             // Fill the overlay bitmap with the dropout color.
             ob.Fill(ob.DropOutColor);
             ob.FontTransparent = true;
-            ob.DrawText(Color.Red, 10, 10, "IC Imaging Control 3.2");
-            ob.DrawFrameRect(Color.Red, 90, 90, 200, 130);
+            ob.DrawText(Color.Red, 10, 10, "Copyright trademark incorporated all rights reserved");
+            ob.DrawFrameRect(Color.Red, IcCam.Width/2-40, IcCam.Height / 2 - 40, IcCam.Width / 2 + 40, IcCam.Height / 2 + 40);
+            
         }
 
         private void icCam_LivePrepared(object sender, EventArgs e)
