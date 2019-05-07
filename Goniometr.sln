@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goniometr", "Goniometr\Goniometr.csproj", "{651F936B-0DC7-4456-A366-5AA587CB41BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonCommand", "GonFactory\GonCommand.csproj", "{862DB85A-31C8-49B2-8D1F-8D036FFD5253}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GonAForge", "GonAForge\GonAForge.csproj", "{AD1C0F16-1F8A-49CD-8846-C1E332FD0B69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{862DB85A-31C8-49B2-8D1F-8D036FFD5253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{862DB85A-31C8-49B2-8D1F-8D036FFD5253}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{862DB85A-31C8-49B2-8D1F-8D036FFD5253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1C0F16-1F8A-49CD-8846-C1E332FD0B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1C0F16-1F8A-49CD-8846-C1E332FD0B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1C0F16-1F8A-49CD-8846-C1E332FD0B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1C0F16-1F8A-49CD-8846-C1E332FD0B69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
