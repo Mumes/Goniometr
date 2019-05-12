@@ -22,6 +22,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
+            <Slider x:Name="slider" HorizontalAlignment="Left" Margin="118,-108,0,0" VerticalAlignment="Top" Height="24" Width="165"/>
         </Grid>
         <Label x:Name="label" Content="Координата X:" HorizontalAlignment="Left" Margin="332,66,0,0" VerticalAlignment="Top" Width="93" Grid.Row="1" Height="26"/>
         <Label x:Name="XVal" Content="{Binding VV.CX}" HorizontalAlignment="Left" Margin="425,66,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" Height="10"/>

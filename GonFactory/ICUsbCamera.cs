@@ -68,16 +68,22 @@ namespace GonCommand
             ImgBuffer = IcCam.ImageActiveBuffer;
             return ImgBuffer.Bitmap;
         }
+        int i = 0;
         private void IcCam_OverlayUpdate(object sender, TIS.Imaging.ICImagingControl.OverlayUpdateEventArgs e)
         {
-           // IcCam.LiveStop();
-
+            //// IcCam.LiveStop();
+            
             TIS.Imaging.OverlayBitmap ob = IcCam.OverlayBitmapAtPath[PathPositions.Device];
             GonImageProcessing gip = new GonImageProcessing(GetLiveImage());
-            //gip.FindBlobs();
+            SetOverlay();
+            //ob.DrawFrameRect(Color.Blue, i, i, i+ 20, i + 20);
+
+
+            //i++;
+
             gip.calcCross();
-            ob.DrawFrameRect(Color.Blue,(int) gip.X, (int)gip.Y, (int)gip.X + 20, (int)gip.Y + 20);
-            //IcCam.LiveStart();
+            ob.DrawFrameRect(Color.Blue, (int)gip.X, (int)gip.Y, (int)gip.X + 20, (int)gip.Y + 20);
+            // //IcCam.LiveStart();
         }
     }
 }

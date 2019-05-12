@@ -34,6 +34,8 @@ namespace GonAForge
             bc.FilterBlobs = true;
             bc.MinWidth = 5;
             bc.MinHeight = 5;
+            bc.MaxHeight = 500;
+            bc.MaxWidth = 500;
             // process binary image
             bc.ProcessImage(Img);
             Blob[] blobs = bc.GetObjects(Img, false);
