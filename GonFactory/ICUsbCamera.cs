@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using TIS.Imaging;
 using GonAForge;
+using System.Drawing.Imaging;
+
 namespace GonCommand
 {
     /// <summary>
@@ -23,18 +25,18 @@ namespace GonCommand
             if (IcCam.Devices.Length > 0)
             {
                 IcCam.Device = IcCam.Devices[0];
-                IcCam.OverlayBitmapPosition = TIS.Imaging.PathPositions.Device;
-                IcCam.OverlayBitmapAtPath[PathPositions.Device].ColorMode = OverlayColorModes.Color;
+               // Binarization();
+                IcCam.OverlayBitmapPosition = TIS.Imaging.PathPositions.Display;
+                IcCam.OverlayBitmapAtPath[PathPositions.Display].ColorMode = OverlayColorModes.Color;
                 IcCam.LivePrepared +=IcCam_LivePrepared;
                 IcCam.OverlayUpdate += IcCam_OverlayUpdate;
                 IcCam.LiveStart();
             }
         }
         private void SetOverlay()
-        {
-            
+        {          
             IcCam.LiveCaptureContinuous = true;
-            TIS.Imaging.OverlayBitmap ob = IcCam.OverlayBitmapAtPath[PathPositions.Device];
+            TIS.Imaging.OverlayBitmap ob = IcCam.OverlayBitmapAtPath[PathPositions.Display];
             // Enable the overlay bitmap for drawing.
             ob.Enable = true;
 
@@ -73,7 +75,7 @@ namespace GonCommand
         {
             //// IcCam.LiveStop();
             
-            TIS.Imaging.OverlayBitmap ob = IcCam.OverlayBitmapAtPath[PathPositions.Device];
+            TIS.Imaging.OverlayBitmap ob = IcCam.OverlayBitmapAtPath[PathPositions.Display];
             GonImageProcessing gip = new GonImageProcessing(GetLiveImage());
             SetOverlay();
             //ob.DrawFrameRect(Color.Blue, i, i, i+ 20, i + 20);
@@ -81,9 +83,24 @@ namespace GonCommand
 
             //i++;
 
-            gip.calcCross();
-            ob.DrawFrameRect(Color.Blue, (int)gip.X, (int)gip.Y, (int)gip.X + 20, (int)gip.Y + 20);
+            gip.CalcCross();
+            ob.DrawFrameRect(Color.Blue, 0, 0, 40, 40);
+            ob.DrawFrameRect(Color.Blue, (int)gip.X, (int)gip.Y, (int)gip.X+ (int)gip.Width, (int)gip.Y + (int)gip.Height);
             // //IcCam.LiveStart();
+        }
+        private void Binarization()
+        {
+            TIS.Imaging.FrameFilter mFrameFilter;
+            BinarizationFilter binFilterImpl = new BinarizationFilter();
+           
+           // Create a FrameFilter object wrapping the implementation
+           mFrameFilter = IcCam.FrameFilterCreate(binFilterImpl);
+            
+            IcCam.DisplayFrameFilters.Add(mFrameFilter);
+            mFrameFilter.BeginParameterTransfer();
+            mFrameFilter.SetBoolParameter("enable", true);
+            mFrameFilter.SetIntParameter("threshold", 127);
+            mFrameFilter.EndParameterTransfer();
         }
     }
 }
