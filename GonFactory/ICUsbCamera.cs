@@ -68,6 +68,22 @@ namespace GonCommand
         {
             ImageBuffer ImgBuffer;
             ImgBuffer = IcCam.ImageActiveBuffer;
+            unsafe
+            {
+                int bufferSize = ImgBuffer.ActualDataSize;
+                byte* pIn=ImgBuffer.GetImageData();
+                while (bufferSize-- > 0)
+                {
+                    if (*pIn >= 127)
+                    {
+                        *pIn++ = 255;
+                    }
+                    else
+                    {
+                        *pIn++ = 0;
+                    }
+                }
+            }
             return ImgBuffer.Bitmap;
         }
         int i = 0;
@@ -79,10 +95,7 @@ namespace GonCommand
             GonImageProcessing gip = new GonImageProcessing(GetLiveImage());
             SetOverlay();
             //ob.DrawFrameRect(Color.Blue, i, i, i+ 20, i + 20);
-
-
             //i++;
-
             gip.CalcCross();
             ob.DrawFrameRect(Color.Blue, 0, 0, 40, 40);
             ob.DrawFrameRect(Color.Blue, (int)gip.X, (int)gip.Y, (int)gip.X+ (int)gip.Width, (int)gip.Y + (int)gip.Height);

@@ -23,7 +23,7 @@ namespace GonAForge
         }
         public void CalcCross()
         {
-            Binarization();
+            //Binarization();
             FindBlobs();
             // X = Img.Width / 2 - x;
             // Y = Img.Height / 2 - y;
@@ -31,15 +31,17 @@ namespace GonAForge
         }
         private void Binarization()
         {      
-            ImageConverter converter = new ImageConverter();
-            byte[] test2 = (byte[])converter.ConvertTo(Img, typeof(byte[]));
-
-            for (int i= 0;i<test2.Length;i++)
-            {
-                if (test2[i] >= 127) test2[i] = 255;
-                else test2[i] = 0;
-            }
-            System.Drawing.Image iImg = (System.Drawing.Image)converter.ConvertFrom(test2);
+            //ImageConverter converter = new ImageConverter();
+            //byte[] test2 = (byte[])converter.ConvertTo(Img, typeof(byte[]));
+            //int rgb;
+            //Color c;
+            //
+            ////for (int i= 107;i<14770;i++)
+            ////{
+            ////    if (test2[i] >= 127) test2[i] = 255;
+            ////    else test2[i] = 0;
+            ////}
+            //Img = (System.Drawing.Bitmap)converter.ConvertFrom(test2);
             Img.Save(@"D:\gon.bmp", ImageFormat.Bmp);
         }
 
