@@ -25,10 +25,10 @@
             <Slider x:Name="slider" HorizontalAlignment="Left" Margin="118,-108,0,0" VerticalAlignment="Top" Height="24" Width="165"/>
         </Grid>
         <Label x:Name="label" Content="Координата X:" HorizontalAlignment="Left" Margin="332,66,0,0" VerticalAlignment="Top" Width="93" Grid.Row="1" Height="26"/>
-        <Label x:Name="XVal" Content="{Binding VV.CX}" HorizontalAlignment="Left" Margin="425,66,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" Height="10"/>
+        <Label x:Name="XVal" Content="{Binding CX}" HorizontalAlignment="Left" Margin="425,66,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" Height="10"/>
         <Label x:Name="label1" Content="Координата Y:" HorizontalAlignment="Left" Margin="227,66,0,0" VerticalAlignment="Top" Width="93" Grid.Row="1" Height="26"/>
-        <Label x:Name="YVal" Content="{Binding VV.CY}" HorizontalAlignment="Left" Margin="320,66,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" Height="10"/>
-        <ComboBox x:Name="Ports" ItemsSource="{Binding VV.SerialPortsArray}" SelectedItem="{Binding Path=VV.SerialPortSelected}" HorizontalAlignment="Left" Margin="873,0,0,505.333" Width="120" Height="22" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <Label x:Name="YVal" Content="{Binding CY}" HorizontalAlignment="Left" Margin="320,66,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" Height="10"/>
+        <ComboBox x:Name="Ports" ItemsSource="{Binding SerialPortsArray}" SelectedItem="{Binding Path=SerialPortSelected}" HorizontalAlignment="Left" Margin="873,0,0,505.333" Width="120" Height="22" VerticalAlignment="Bottom" Grid.Row="1"/>
         <TextBox x:Name="Baud" Text="{Binding Path=VV.BaudRateValue}" HorizontalAlignment="Left" Height="23" Margin="873,33,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="1"/>
         <Button x:Name="Init" Command="{Binding InitCommand}" Content="Button" HorizontalAlignment="Left" Margin="890,61,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="20"/>
         <Button x:Name="Read" Command="{Binding ReadCommand}" Content="Button" HorizontalAlignment="Left" Margin="108,55,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="20"/>

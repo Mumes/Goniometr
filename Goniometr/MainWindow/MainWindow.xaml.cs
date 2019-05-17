@@ -23,11 +23,11 @@ namespace Goniometr
     /// </summary>
     public partial class MainWindow : Window
     {
-        GonCommandClient gcc;
+        MainWindowViewModel gcc;
         public MainWindow()
         {
             InitializeComponent();
-            gcc = new GonCommandClient();
+            gcc = new MainWindowViewModel();
             DataContext = gcc;
         }
 
